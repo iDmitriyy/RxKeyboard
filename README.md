@@ -4,7 +4,7 @@ RxKeyboard provides a reactive way of handling standard keyboard events instead 
 
 There are totally 6 events: willBeShown/wasShown, willBeHidden/wasHidden, willChangeFrame/didChangeFrame
 
-Every event is handled with additional info about Keyboard UI state:
+Every event contains additional UI information about Keyboard:
 
 	struct RxKeyboardAnimationParams {
 	    let initialFrame: CGRect
