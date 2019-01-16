@@ -76,17 +76,13 @@ extension RxKeyboard {
     }
     
     private func bindShowingEvents() {
-        let willShowEvent = NotificationCenter.default.rx.notification(UIResponder.keyboardWillShowNotification)
-        
-        willShowEvent
+        NotificationCenter.default.rx.notification(UIResponder.keyboardWillShowNotification)
             .map { notification -> RxKeyboardAnimationParams? in
                 return type(of: self).animationParams(notification)
             }
             .filterNil().bind(to: _willBeShown).disposed(by: disposeBag)
         
-        let didShowEvent = NotificationCenter.default.rx.notification(UIResponder.keyboardDidShowNotification)
-        
-        didShowEvent
+        NotificationCenter.default.rx.notification(UIResponder.keyboardDidShowNotification)
             .map { notification -> CGRect? in
                 return type(of: self).finalFrame(notification)
             }
@@ -94,17 +90,13 @@ extension RxKeyboard {
     }
     
     private func bindHidingEvents() {
-        let willHideEvent = NotificationCenter.default.rx.notification(UIResponder.keyboardWillHideNotification)
-        
-        willHideEvent
+        NotificationCenter.default.rx.notification(UIResponder.keyboardWillHideNotification)
             .map { notification -> RxKeyboardAnimationParams? in
                 return type(of: self).animationParams(notification)
             }
             .filterNil().bind(to: _willBeHidden).disposed(by: disposeBag)
         
-        let didHideEvent = NotificationCenter.default.rx.notification(UIResponder.keyboardDidHideNotification)
-        
-        didHideEvent
+        NotificationCenter.default.rx.notification(UIResponder.keyboardDidHideNotification)
             .map { notification -> CGRect? in
                 return type(of: self).initialFrame(notification)
             }
@@ -112,19 +104,13 @@ extension RxKeyboard {
     }
     
     private func bindChangingFrameEvents() {
-        let willChangeFrameEvent = NotificationCenter.default.rx
-            .notification(UIResponder.keyboardWillChangeFrameNotification)
-        
-        willChangeFrameEvent
+        NotificationCenter.default.rx.notification(UIResponder.keyboardWillChangeFrameNotification)
             .map { notification -> RxKeyboardAnimationParams? in
                 return type(of: self).animationParams(notification)
             }
             .filterNil().bind(to: self._willChangeFrame).disposed(by: disposeBag)
         
-        let didChangeFrameEvent = NotificationCenter.default.rx
-            .notification(UIResponder.keyboardDidChangeFrameNotification)
-        
-        didChangeFrameEvent
+        NotificationCenter.default.rx.notification(UIResponder.keyboardDidChangeFrameNotification)
             .map { notification -> CGRect? in
                 return type(of: self).finalFrame(notification)
             }
